@@ -1,6 +1,7 @@
 import React from "react";
 import HomePresenter from "./HomePresenter";
 import {moviesApi} from "api";
+import Error from "Components/Error";
 
 export default class extends React.Component {
     state = {
