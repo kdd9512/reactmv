@@ -2,7 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Loader from "Components/Loader";
+import ReactPlayer from "react-player";
 import {Helmet, HelmetProvider} from "react-helmet-async";
+import {Tab, Tabs} from "react-bootstrap";
+import "CSS/TabStyle.css";
+
 
 const Container = styled.div`
     height: calc(100vh - 50px);
@@ -51,7 +55,19 @@ const Title = styled.span`
     font-size: 35px;
 `;
 
-const Item = styled.span``;
+const Item = styled.span`
+    line-height: 2.0;
+`;
+
+const IMDb = styled.a`
+    line-height: 1.5;
+`;
+
+const IMDbImg = styled.img`
+    margin-bottom: -5px;
+    width: 40px;
+    height: 20px;
+`;
 
 const ItemContainer = styled.div`
     margin-top: 10px;
@@ -61,7 +77,7 @@ const Divider = styled.span`
     margin: 0 10px;
 `;
 
-const Overview = styled.p`
+const Synop = styled.p`
     margin-top : 10px;
     font-size : 13px;
     opacity: 0.6;
@@ -119,8 +135,23 @@ const DetailPresenter = ({result, error, loading}) => (
                                     : `${genre.name} / `
                             )}
                             </Item>
+                            <Divider>{" "}</Divider>
+                            {result.imdb_id ? (
+                                    <IMDb href={`https://www.imdb.com/title/${result.imdb_id}`} target={"_blank"}>
+                                        <IMDbImg
+                                            src={"https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/IMDB_Logo_2016.svg/220px-IMDB_Logo_2016.svg.png"}/>
+                                    </IMDb>
+                                )
+                                : null}
                         </ItemContainer>
-                        <Overview>{result.overview}</Overview>
+                        <Tabs defaultActiveKey="synopsis" className="navTab">
+                            <Tab title="synopsis" eventKey="synopsis" tabClassName="tab">
+                                {(<Synop>{result.overview}</Synop>)}
+                            </Tab>
+                            <Tab title="trailer" eventKey="trailer" tabClassName="tab">
+                                <ReactPlayer url={`https://www.youtube.com/watch?v=${result.videos.results[0].key}`} />
+                            </Tab>
+                        </Tabs>
                     </Data>
                 </Content>
             </Container>
@@ -133,7 +164,6 @@ DetailPresenter.propTypes = {
     result: PropTypes.object,
     loading: PropTypes.bool.isRequired,
     error: PropTypes.string
-
 }
 
 export default DetailPresenter;
