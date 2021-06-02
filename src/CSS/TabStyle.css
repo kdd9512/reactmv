@@ -1,19 +1,46 @@
-.navTab {
-    margin-top: 10px;
-    padding: 10px;
+.tabContainer {
+    margin-left: -10px;
 }
 
-.tab {
-    margin: 20px 15px 15px 10px;
-    border: 1px solid white;
-    border-radius: 4px;
+.tabList {
+    margin: 10px 15px 10px 15px;
     width: max-content;
     height: max-content;
     position: relative;
-    content-visibility: hidden;
     opacity: 0.8;
     font-size: 25px;
+    justify-content: center;
 }
 
+.tabMenu {
+    float: left;
+    margin: 0px 10px 20px 10px;
+    text-align: center;
+}
 
+.tabMenu:hover {
+    font-weight: bold;
+}
 
+.tabContent {
+    clear: both;
+    margin: 0px 10px 0px 10px;
+    text-align: center;
+}
+
+.tab-list {  border-bottom: 1px solid #ccc;
+    padding-left: 0;
+}
+
+.tab-list-item {
+    display: inline-block;
+    list-style: none;
+    margin-bottom: -1px;
+    padding: 0.5rem 0.75rem;
+}
+
+.tab-list-active {
+    background-color: white;
+    border: solid #ccc;
+    border-width: 1px 1px 0 1px;
+}

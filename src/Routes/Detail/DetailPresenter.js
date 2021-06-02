@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Loader from "Components/Loader";
 import ReactPlayer from "react-player";
 import {Helmet, HelmetProvider} from "react-helmet-async";
-import {Tab, Tabs} from "react-bootstrap";
+import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 import "CSS/TabStyle.css";
 
 
@@ -82,7 +82,7 @@ const Synop = styled.p`
     font-size : 13px;
     opacity: 0.6;
     line-height: 2;
-    width: 50%; 
+    width: 50%;
 `;
 
 
@@ -135,7 +135,7 @@ const DetailPresenter = ({result, error, loading}) => (
                                     : `${genre.name} / `
                             )}
                             </Item>
-                            <Divider>{" "}</Divider>
+                            <Divider>{""}</Divider>
                             {result.imdb_id ? (
                                     <IMDb href={`https://www.imdb.com/title/${result.imdb_id}`} target={"_blank"}>
                                         <IMDbImg
@@ -144,14 +144,25 @@ const DetailPresenter = ({result, error, loading}) => (
                                 )
                                 : null}
                         </ItemContainer>
-                        <Tabs defaultActiveKey="synopsis" className="navTab">
-                            <Tab title="synopsis" eventKey="synopsis" tabClassName="tab">
-                                {(<Synop>{result.overview}</Synop>)}
-                            </Tab>
-                            <Tab title="trailer" eventKey="trailer" tabClassName="tab">
-                                <ReactPlayer url={`https://www.youtube.com/watch?v=${result.videos.results[0].key}`} />
-                            </Tab>
-                        </Tabs>
+                        <>
+                            <Tabs defaultFocus={0} className="tabContainer">
+                                <TabList className="tabList">
+                                    <Tab className="tabMenu" eventKey={0}>synopsis</Tab>
+                                    <Tab className="tabMenu" eventKey={1}>trailer</Tab>
+                                    <Tab className="tabMenu" eventKey={2}>staff</Tab>
+                                </TabList>
+                                <TabPanel className="tabContent" eventKey={0}>
+                                    <Synop>{result.overview}</Synop>
+                                </TabPanel>
+                                <TabPanel className="tabContent" eventKey={1}>
+                                    <ReactPlayer
+                                        url={`https://www.youtube.com/watch?v=${result.videos.results[0].key}`}/>
+                                </TabPanel>
+                                <TabPanel className="tabContent" eventKey={2}>
+                                    <p>wefw</p>
+                                </TabPanel>
+                            </Tabs>
+                        </>
                     </Data>
                 </Content>
             </Container>

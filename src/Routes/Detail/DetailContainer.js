@@ -37,8 +37,8 @@ export default class extends React.Component {
                 } = await moviesApi.movieDetail(parseID));
             } else {
                 ({
-                    data:result
-                }= await tvApi.showDetail(parseID));
+                    data: result
+                } = await tvApi.showDetail(parseID));
             }
 
         } catch {
@@ -51,13 +51,12 @@ export default class extends React.Component {
 
     render() {
         const {result, error, loading} = this.state;
-        console.log(result)
         return (
-            <DetailPresenter
-                result={result}
-                error={error}
-                loading={loading}
-            />
+                <DetailPresenter
+                    result={result}
+                    error={error}
+                    loading={loading}
+                />
         );
     }
 }

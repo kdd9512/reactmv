@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Section from "Components/Section";
 import Loader from "Components/Loader";
 import Error from "Components/Error";
-import Poster from "../../Components/Poster";
+import Poster from "Components/Poster";
 import {Helmet, HelmetProvider} from "react-helmet-async";
 
 const Container = styled.div`
