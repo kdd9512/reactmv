@@ -7,6 +7,14 @@ import {Helmet, HelmetProvider} from "react-helmet-async";
 import {Tab, TabList, TabPanel, Tabs} from "react-tabs";
 import "CSS/TabStyle.css";
 
+const settings = {
+    dots: true,
+    speed: 500,
+    arrows: true,
+    autoplay: false,
+    slidesToShow: 5,
+    slidesToScroll: 5
+}
 
 const Container = styled.div`
     height: calc(100vh - 50px);
@@ -78,15 +86,58 @@ const Divider = styled.span`
 `;
 
 const Synop = styled.p`
-    margin-top : 10px;
+    margin : 10px 0px 0px 40px;
     font-size : 13px;
     opacity: 0.6;
     line-height: 2;
-    width: 50%;
+    width: 70%;
+    text-align: center;
+`;
+
+const Box = styled.div`
+    float:left;
+    clear:both;
+    display:flex;
+`;
+
+const Actor = styled.div`
+`;
+
+const Crew = styled.div`
+`;
+
+const Info = styled.a`
+  float: left;
+  margin:0px 15px 20px 15px;
+  height:min-content;
+  width:min-content;
+  justify-content: center;
+`;
+
+const Portrait = styled.img`
+    clear:both;
+    height:180px;
+    width:140px;
+    border-radius: 4px;
+    position: flex;
+`;
+
+const StaffInfo = styled.p`
+    clear:both;
+    color:black;
+    font-size:15px;
+`;
+const Etc = styled.span`
+  margin: 10px 0px 30px 10px;
+  float: left;
+  justify-content: center;
+  align-items: center;
+  width:max-content;
+  height:max-content;
 `;
 
 
-const DetailPresenter = ({result, error, loading}) => (
+const DetailPresenter = ({result, credits, error, loading}) => (
     loading ? (
         <HelmetProvider>
             <Helmet>
@@ -156,10 +207,69 @@ const DetailPresenter = ({result, error, loading}) => (
                                 </TabPanel>
                                 <TabPanel className="tabContent" eventKey={1}>
                                     <ReactPlayer
+                                        width="730px"
+                                        height="460px"
                                         url={`https://www.youtube.com/watch?v=${result.videos.results[0].key}`}/>
                                 </TabPanel>
                                 <TabPanel className="tabContent" eventKey={2}>
-                                    <p>wefw</p>
+                                    <Box>
+                                        <Actor>
+                                            {credits.cast && credits.cast.length > 0
+                                                ? credits.cast.map((actor, index) =>
+                                                    index < 4 ? (
+                                                        <Info>
+                                                            <Portrait
+                                                                src={actor.profile_path ?
+                                                                    `https://image.tmdb.org/t/p/original/${actor.profile_path}`
+                                                                    : require("assets/noImg.png").default}
+                                                            />
+                                                            <StaffInfo>
+                                                                {actor.original_name}
+                                                            </StaffInfo>
+                                                            <StaffInfo>
+                                                                {`Star as ${actor.character}`}
+                                                            </StaffInfo>
+                                                        </Info>
+                                                    ) : null
+                                                )
+                                                : "Not found information"}
+                                            {credits.cast.length > 4 ? (
+                                                <Etc>
+                                                    + {credits.cast.length - 4} Actors...
+                                                </Etc>
+                                            ) : null}
+                                        </Actor>
+
+                                    </Box>
+                                    <Box>
+                                        <Crew>
+                                            {credits.crew && credits.crew.length > 0
+                                                ? credits.crew.map((crew, index) =>
+                                                    index < 4 ? (
+                                                        <Info>
+                                                            <Portrait
+                                                                src={crew.profile_path ?
+                                                                    `https://image.tmdb.org/t/p/original/${crew.profile_path}`
+                                                                    : require("assets/noImg.png").default}
+                                                            />
+                                                            <StaffInfo>
+                                                                {crew.original_name}
+                                                            </StaffInfo>
+                                                            <StaffInfo>
+                                                                {`Role as ${crew.job}`}
+                                                            </StaffInfo>
+                                                        </Info>
+                                                    ) : null
+                                                )
+                                                : "Not found information"}
+                                            {credits.crew.length > 4 ? (
+                                                <Etc>
+                                                    + {credits.crew.length - 4} Crews...
+                                                </Etc>
+                                            ) : null}
+                                        </Crew>
+
+                                    </Box>
                                 </TabPanel>
                             </Tabs>
                         </>

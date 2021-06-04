@@ -30,33 +30,43 @@ export default class extends React.Component {
             return push("/");
         }
         let result = null;
+        let credits = null;
+
         try {
             if (isMovie) {
                 ({
                     data: result
-                } = await moviesApi.movieDetail(parseID));
+                } = await moviesApi.movieDetail(parseID))
+                ({
+                    data: credits
+                } = await moviesApi.creditDetail(parseID));
             } else {
                 ({
                     data: result
-                } = await tvApi.showDetail(parseID));
+                } = await tvApi.showDetail(parseID))
+                ({
+                    data: credits
+                } = await tvApi.creditDetail(parseID));
             }
 
         } catch {
             this.setState({error: "Can't find anything..."})
         } finally {
-            this.setState({loading: false, result})
+            this.setState({loading: false, result, credits})
         }
 
     }
 
     render() {
-        const {result, error, loading} = this.state;
+        const {result, credits, error, loading} = this.state;
+        console.log(credits)
         return (
-                <DetailPresenter
-                    result={result}
-                    error={error}
-                    loading={loading}
-                />
+            <DetailPresenter
+                result={result}
+                credits={credits}
+                error={error}
+                loading={loading}
+            />
         );
     }
 }

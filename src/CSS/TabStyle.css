@@ -14,19 +14,27 @@
 
 .tabMenu {
     float: left;
-    margin: 0px 10px 20px 10px;
+    margin: 0 10px 35px 10px;
     text-align: center;
 }
 
 .tabMenu:hover {
     font-weight: bold;
+    opacity: 1;
 }
 
 .tabContent {
+    display: flex;
     clear: both;
-    margin: 0px 10px 0px 10px;
+    margin: 10px 10px 0px 10px;
     text-align: center;
+    width: calc(90% - 200px);
+    height: auto;
+    flex-direction: column;
+    place-content: center;
 }
+
+
 
 .tab-list {  border-bottom: 1px solid #ccc;
     padding-left: 0;
