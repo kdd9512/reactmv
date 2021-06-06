@@ -124,7 +124,7 @@ const Portrait = styled.img`
 
 const StaffInfo = styled.p`
     clear:both;
-    color:black;
+    color:antiquewhite;
     font-size:15px;
 `;
 const Etc = styled.span`
