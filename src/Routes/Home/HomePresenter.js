@@ -30,7 +30,9 @@ const HomePresenter = ({nowPlaying, upcoming, popular, loading, error}) => (
                                 imageUrl={movie.poster_path}
                                 title={movie.original_title}
                                 rating={movie.vote_average}
-                                year={movie.release_date.substring(0, 4)}
+                                year={movie.release_date
+                                    // .substring(0, 4)
+                                    }
                                 isMovie={true}
                             />)}
                     </Section>
@@ -44,7 +46,9 @@ const HomePresenter = ({nowPlaying, upcoming, popular, loading, error}) => (
                                 imageUrl={movie.poster_path}
                                 title={movie.original_title}
                                 rating={movie.vote_average}
-                                year={movie.release_date.substring(0, 4)}
+                                year={movie.release_date
+                                    // .substring(0, 4)
+                                }
                                 isMovie={true}
                             />)}
                     </Section>
@@ -58,7 +62,9 @@ const HomePresenter = ({nowPlaying, upcoming, popular, loading, error}) => (
                                 imageUrl={movie.poster_path}
                                 title={movie.original_title}
                                 rating={movie.vote_average}
-                                year={movie.release_date.substring(0, 4)}
+                                year={movie.release_date
+                                    // .substring(0,4)
+                                }
                                 isMovie={true}
                             />)}
                     </Section>
@@ -69,7 +75,6 @@ const HomePresenter = ({nowPlaying, upcoming, popular, loading, error}) => (
     </HelmetProvider>
 );
 
-
 HomePresenter.propTypes = {
     nowPlaying: PropTypes.array,
     upcoming: PropTypes.array,
@@ -77,6 +82,5 @@ HomePresenter.propTypes = {
     loading: PropTypes.bool.isRequired,
     error: PropTypes.string
 };
-
 
 export default HomePresenter;
